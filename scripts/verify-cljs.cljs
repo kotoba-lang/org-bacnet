@@ -1,0 +1,22 @@
+#!/usr/bin/env nbb
+;; Run the suite on the ClojureScript side.
+;;
+;; Not a formality — bacnet.tags shifts and masks a packed 32-bit
+;; ObjectIdentifier throughout, and JavaScript's bitwise operators are
+;; 32-bit and *signed* where the JVM's are 64-bit. The docstring in
+;; bacnet.tags explains why extraction is still correct on both platforms;
+;; this script is what actually proves it rather than assuming it.
+;;
+;;   nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljs
+(ns verify-cljs
+  (:require [clojure.test :as t]
+            [bacnet.core-test]))
+
+(defmethod t/report [:cljs.test/default :end-run-tests] [m]
+  (println)
+  (if (t/successful? m)
+    (println "all checks passed on the ClojureScript path")
+    (do (println "FAILED on the ClojureScript path")
+        (js/process.exit 1))))
+
+(t/run-tests 'bacnet.core-test)

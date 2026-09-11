@@ -99,7 +99,7 @@ suite would never catch it. Both docstrings walk through this in full.
 
 ```sh
 clojure -M:test                                                        # JVM
-nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljs   # ClojureScript
+nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljk   # ClojureScript
 ```
 
 51 tests, 430 assertions, on both runtimes. Coverage: object-identifier

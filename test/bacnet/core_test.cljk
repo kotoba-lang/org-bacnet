@@ -1,5 +1,5 @@
 (ns bacnet.core-test
-  (:require [clojure.test :refer [deftest testing is run-tests]]
+  (:require [kotoba.test :refer [deftest testing is run-tests]]
             [bacnet.tags :as tags]
             [bacnet.npdu :as npdu]
             [bacnet.bvlc :as bvlc]
